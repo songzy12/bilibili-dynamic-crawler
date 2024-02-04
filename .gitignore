@@ -1,6 +1,5 @@
 config.py
 
-__pycache__
+__pycache__/
 
-*.jpg
-*.png
+output/
