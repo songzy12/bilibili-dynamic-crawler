@@ -1,5 +1,14 @@
 ## Bilibili Crawler
 
+初始化：
+
+```
+git clone --single-branch --branch main git@github.com:songzy12/bilibili-crawler.git
+
+cd bilibili-crawler
+git clone --single-branch --branch output git@github.com:songzy12/bilibili-crawler.git output
+```
+
 ### 功能1：给定用户 MID，爬取其动态下的所有图片，并发布日期保存至相应的文件夹内。
 
 示例：https://space.bilibili.com/34579852/dynamic
