@@ -1,3 +1,4 @@
+import argparse
 import os
 import requests
 import time
@@ -11,6 +12,9 @@ from .dynamic_api_util import build_dynamic_api_url, build_next_dynamic_api_url,
 OUTPUT_ROOT_DIR = 'output/dynamic'
 URLS_FILENAME = 'picture_urls.json'
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--force', help='Whether to force update picture urls.')
+args = parser.parse_args()
 
 def extract_all_picture_urls(mid, cookie):
     headers = {
@@ -82,7 +86,7 @@ if __name__ == '__main__':
     picture_urls = {}
 
     urls_filepath = os.path.join(OUTPUT_ROOT_DIR, str(MID), URLS_FILENAME)
-    if not os.path.exists(urls_filepath):
+    if not os.path.exists(urls_filepath) or args.force:
         picture_urls = extract_all_picture_urls(MID, COOKIE)
 
         make_parent_dirs_if_not_exist(urls_filepath)
