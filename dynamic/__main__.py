@@ -78,7 +78,7 @@ def download_pictures(picture_urls):
             download_picture(
                 url,
                 os.path.join(OUTPUT_ROOT_DIR, str(MID),
-                             pub_dt.strftime("%Y%m%d_%H%M%S"),
+                             pub_dt.strftime("%Y/%m/%d_%H%M%S"),
                              f'{index}_{picture_name}'))
 
 
