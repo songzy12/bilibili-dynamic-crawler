@@ -31,6 +31,7 @@ def extract_all_picture_urls(mid, cookie):
         "Cookie": cookie
     }
 
+    # TODO: we can load the already crawled picture urls here.
     picture_urls = {}
 
     dynamic_api_url = build_dynamic_api_url(mid)
@@ -39,6 +40,7 @@ def extract_all_picture_urls(mid, cookie):
         resp = requests.get(dynamic_api_url, headers=headers).json()
 
         current_picture_urls = extract_picture_urls(resp)
+        # TODO: we can check whether current picture urls are already crawled, and break the loop early.
         picture_urls.update(current_picture_urls)
 
         dynamic_api_url = build_next_dynamic_api_url(mid, resp)
