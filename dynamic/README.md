@@ -1,4 +1,5 @@
 <https://space.bilibili.com/34579852/dynamic>
+<https://t.bilibili.com/1016739370268360729>
 
 ## API URL
 
@@ -6,13 +7,13 @@
 
 ## URL参数
 
-| 参数名          | 类型 | 必填 | 内容       | 备注 |
-| --------------- | ---- | ---- | ---------- | ---- |
-| offset          | str  |      | 分页偏移量 |      |
-| host_mid        | str  | √    | 用户UID    |      |
-| timezone_offset | num  |      | `-480`     |      |
+| 参数名          | 类型 | 必要性 | 内容       | 备注                   |
+| --------------- | ---- | ------ | ---------- | ---------------------- |
+| offset          | num  | 非必要 | 分页偏移量 | 默认为空, 翻页时使用   |
+| host_mid        | num  | 非必要 | UP主UID    | 仅新版, 如 `293793435` |
+| timezone_offset | str  | 非必要 | `-480`     | 新版无                 |
 
-## `data`对象
+## `data`
 
 | 字段名          | 类型  | 内容                         | 备注                                               |
 | --------------- | ----- | ---------------------------- | -------------------------------------------------- |
@@ -22,7 +23,7 @@
 | update_baseline | str   | 更新基线                     | 等于`items`中第一条记录的id                        |
 | update_num      | num   | 本次获取获取到了多少条新动态 | 在更新基线以上的动态条数                           |
 
-## `data`对象 -> `items`数组中的对象
+## `data.items[n]`
 
 | 字段名  | 类型 | 内容       | 备注                                           |
 | ------- | ---- | ---------- | ---------------------------------------------- |
@@ -39,14 +40,20 @@
 | ----------------- | -------- | --------------------------------------------------------------- |
 | DYNAMIC_TYPE_DRAW | 带图动态 | [718384798557536290](https://t.bilibili.com/718384798557536290) |
 
-## `data`对象 -> `items`数组中的对象 -> `modules`对象 -> `module_author`对象
+## `data.items[n].modules.module_author`
 
 | 字段名   | 类型 | 内容       | 备注                               |
 | -------- | ---- | ---------- | ---------------------------------- |
 | pub_time | str  | 更新时间   | `x分钟前`<br/>`x小时前`<br/>`昨天` |
-| pub_ts   | num  | 更新时间戳 | 单位：秒                           |
+| pub_ts   | num  | 更新时间戳 | UNIX 秒级时间戳                    |
 
-## `data`对象 -> `items`数组中的对象 -> `modules`对象 -> `module_dynamic`对象 -> `major`对象 -> `draw`对象 -> `items`数组中的对象
+## `data.items[n].modules.module_dynamic.desc`
+
+| 字段 | 类型 | 内容           | 备注 |
+| ---- | ---- | -------------- | ---- |
+| text | str  | 动态的文字内容 |      |
+
+## `data.items[n].modules.module_dynamic.major.draw.items[o]`
 
 | 字段名 | 类型  | 内容     | 备注   |
 | ------ | ----- | -------- | ------ |
@@ -60,3 +67,4 @@
 
 - <https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/dynamic/space.md>
 - <https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/dynamic/all.md>
+- <https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/dynamic/dynamic_enum.md>
