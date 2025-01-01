@@ -17,18 +17,25 @@ def build_next_dynamic_api_url(mid, resp):
     return build_dynamic_api_url(mid, resp["data"]["offset"])
 
 
-def extract_picture_urls(resp):
-    picture_urls = {}
+def parse_metadata(resp):
+    metadata = {}
 
     for item in resp["data"]["items"]:
         if item["type"] != "DYNAMIC_TYPE_DRAW":
             continue
-        module_author = item["modules"]["module_author"]
-        module_dynamic_items = item["modules"]["module_dynamic"]["major"]["draw"][
-            "items"
-        ]
-        picture_urls[module_author["pub_ts"]] = [
-            module_dynamic_item["src"] for module_dynamic_item in module_dynamic_items
-        ]
 
-    return picture_urls
+        id_str = item["id_str"]
+        pub_ts = item["modules"]["module_author"]["pub_ts"]
+        module_dynamic = item["modules"]["module_dynamic"]
+        text = module_dynamic["desc"]["text"]
+        draw = module_dynamic["major"]["draw"]
+
+        metadata[id_str] = {
+            "t_url": "https://t.bilibili.com/" + id_str,
+            "doc_id": draw["id"],
+            "upload_timestamp": pub_ts,
+            "description": text,
+            "pictures": [item["src"] for item in draw["items"]],
+        }
+
+    return metadata
