@@ -1,6 +1,6 @@
-## Bilibili Crawler
+## B站 爬虫
 
-初始化：
+### 初始化
 
 ```
 git clone --single-branch --branch main git@github.com:songzy12/bilibili-crawler.git
